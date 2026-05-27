@@ -1,6 +1,5 @@
 import 'wallet_feature_type.dart';
 
-/// Pure domain model — no Flutter/UI dependencies.
 /// Represents a single feature highlight shown on the wallet screen.
 class WalletFeatureEntity {
   const WalletFeatureEntity({

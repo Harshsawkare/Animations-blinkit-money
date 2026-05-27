@@ -58,11 +58,11 @@ class FeatureCardWidget extends StatelessWidget {
   String _imageAssetFor(WalletFeatureType type) {
     switch (type) {
       case WalletFeatureType.singleTapPayment:
-        return 'assets/singleTapPayments.png';
+        return AppConstants.singleTapPaymentAsset;
       case WalletFeatureType.zeroFailures:
-        return 'assets/zeroFailures.png';
+        return AppConstants.zeroFailuresAsset;
       case WalletFeatureType.realTimeRefunds:
-        return 'assets/realTimeRefunds.png';
+        return AppConstants.realTimeRefundsAsset;
     }
   }
 }

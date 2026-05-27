@@ -2,7 +2,6 @@ import '../entities/wallet_feature_entity.dart';
 import '../repositories/wallet_repository.dart';
 
 /// Single-responsibility use case: fetches and returns wallet feature highlights.
-/// The presentation layer calls this instead of accessing the repository directly.
 class GetWalletFeaturesUseCase {
   const GetWalletFeaturesUseCase(this._repository);
 

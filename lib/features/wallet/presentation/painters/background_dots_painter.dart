@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/constants/app_constants.dart';
 
-/// Paints the subtle repeating dot grid that sits on top of the dark background,
-/// matching the texture visible in the reference design.
+/// Paints the subtle repeating dot grid
 class BackgroundDotsPainter extends CustomPainter {
   const BackgroundDotsPainter();
 

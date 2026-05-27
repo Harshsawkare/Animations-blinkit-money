@@ -3,8 +3,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/constants/app_constants.dart';
 
-/// Row tile that lets the user navigate to the gift card redemption flow.
-/// Separated from the feature cards so it can be individually tapped or hidden.
+/// Row tile that lets the user navigate to the gift card flow.
 class ClaimGiftCardWidget extends StatelessWidget {
   const ClaimGiftCardWidget({super.key, this.onTap});
 
@@ -31,10 +30,10 @@ class ClaimGiftCardWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
-                  Text('Claim Gift Card', style: AppTextStyles.claimTitle),
+                  Text(AppConstants.claimGiftCardTitle, style: AppTextStyles.claimTitle),
                   SizedBox(height: 2),
                   Text(
-                    'Enter gift card details to claim your gift card',
+                    AppConstants.claimGiftCardSubtitle,
                     style: AppTextStyles.claimSubtitle,
                   ),
                 ],
@@ -54,7 +53,6 @@ class ClaimGiftCardWidget extends StatelessWidget {
   }
 }
 
-/// Custom gift-card box icon drawn purely with Canvas to avoid asset dependencies.
 class _GiftCardIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

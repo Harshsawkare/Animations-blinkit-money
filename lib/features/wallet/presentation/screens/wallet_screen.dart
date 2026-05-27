@@ -215,7 +215,7 @@ class _WalletScreenState extends State<WalletScreen>
                           SizedBox(
                             width: AppConstants.walletIllustrationSize,
                             height: AppConstants.walletIllustrationSize,
-                            child: Image.asset('assets/wallet.png'),
+                            child: Image.asset(AppConstants.walletAsset),
                           ),
 
                           const SizedBox(height: AppConstants.spacingM),
@@ -224,7 +224,7 @@ class _WalletScreenState extends State<WalletScreen>
                           _SlideInWidget(
                             animation: _blinkitAnim,
                             child: const Text(
-                              'blinkit',
+                              AppConstants.brandName,
                               style: AppTextStyles.brandName,
                             ),
                           ),
@@ -233,7 +233,7 @@ class _WalletScreenState extends State<WalletScreen>
                           _SlideInWidget(
                             animation: _moneyAnim,
                             child: const Text(
-                              'MONEY',
+                              AppConstants.brandTitle,
                               style: AppTextStyles.brandTitle,
                             ),
                           ),
@@ -302,7 +302,7 @@ class _WalletScreenState extends State<WalletScreen>
             // ── Confetti Lottie (rendered above all content, non-interactive) ──
             IgnorePointer(
               child: Lottie.asset(
-                'assets/confetti.json',
+                AppConstants.confettiAsset,
                 controller: _lottieController,
                 onLoaded: (composition) {
                   _lottieController
@@ -353,7 +353,7 @@ class _WatermarkText extends StatelessWidget {
         horizontal: AppConstants.screenHorizontalPadding,
       ),
       child: Text(
-        'Enjoy seamless\none tap payments',
+        AppConstants.watermarkText,
         style: AppTextStyles.watermark,
         textAlign: TextAlign.center,
       ),

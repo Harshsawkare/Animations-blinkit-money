@@ -18,14 +18,14 @@ class WalletHeaderWidget extends StatelessWidget {
         SizedBox(
           width: AppConstants.walletIllustrationSize,
           height: AppConstants.walletIllustrationSize,
-          child: Image.asset('assets/wallet.png'),
+          child: Image.asset(AppConstants.walletAsset),
         ),
 
         const SizedBox(height: AppConstants.spacingM),
 
         // ── Brand name ────────────────────────────────────────────────────
-        const Text('blinkit', style: AppTextStyles.brandName),
-        const Text('MONEY', style: AppTextStyles.brandTitle),
+        const Text(AppConstants.brandName, style: AppTextStyles.brandName),
+        const Text(AppConstants.brandTitle, style: AppTextStyles.brandTitle),
       ],
     );
   }

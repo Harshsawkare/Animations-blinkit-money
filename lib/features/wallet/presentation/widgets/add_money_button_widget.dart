@@ -20,7 +20,7 @@ class AddMoneyButtonWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppConstants.addMoneyButtonRadius),
         ),
         alignment: Alignment.center,
-        child: const Text('Add Money', style: AppTextStyles.addMoneyButton),
+        child: const Text(AppConstants.addMoneyLabel, style: AppTextStyles.addMoneyButton),
       ),
     );
   }

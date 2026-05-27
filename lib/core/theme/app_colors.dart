@@ -21,17 +21,9 @@ class AppColors {
 
   // Gift card accent
   static const Color giftCardOrange = Color(0xFFD4731A);
-  static const Color giftCardOrangeLight = Color(0xFFE8962A);
 
   // Text
   static const Color textPrimary = Color(0xFFFFFFFF);
   static const Color textSecondary = Color(0xFFAAAAAA);
   static const Color textWatermark = Color(0xFF3A3C20);
-
-  // Divider
-  static const Color divider = Color(0xFF333420);
-
-  // Icon foreground (white used on dark icon backgrounds)
-  static const Color iconForeground = Color(0xFFFFFFFF);
-  static const Color iconAccentYellow = Color(0xFFD4A500);
 }

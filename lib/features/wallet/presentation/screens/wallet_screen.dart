@@ -35,11 +35,12 @@ class _WalletScreenState extends State<WalletScreen>
   late final Animation<double> _groupMoveAnim;
   late final List<Animation<double>> _contentAnims;
 
+  // Fade-in animations for Add Money, Claim Gift Card, and watermark —
+  // staggered one by one after the last feature card finishes.
+  late final List<Animation<double>> _fadeAnims;
+
   late final AnimationController _lottieController;
   bool _introComplete = false;
-
-  // cards + AddMoneyButton + ClaimGiftCard + WatermarkText
-  int get _contentItemCount => _features.length + 3;
 
   @override
   void initState() {
@@ -79,23 +80,42 @@ class _WalletScreenState extends State<WalletScreen>
     );
 
     // ── Content controller ────────────────────────────────────────────────
-    // Each item animates over 350ms, staggered by 250ms.
-    const int itemDurationMs = 350;
-    const int itemStaggerMs = 250;
-    final int contentTotalMs =
-        (_contentItemCount - 1) * itemStaggerMs + itemDurationMs;
+    // Feature cards slide in one by one (350 ms each, staggered 250 ms).
+    // Once the last card finishes, the remaining 3 items fade in together.
+    const int cardDurationMs = 350;
+    const int cardStaggerMs  = 250;
+    const int fadeDurationMs = 350;
+    const int fadeStaggerMs  = 250;
+
+    final int lastCardEndMs =
+        (_features.length - 1) * cardStaggerMs + cardDurationMs;
+    // 3 fade items staggered: total fade window = 2*250 + 350 = 850 ms
+    final int contentTotalMs = lastCardEndMs + 2 * fadeStaggerMs + fadeDurationMs;
 
     _contentController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: contentTotalMs),
     );
 
-    _contentAnims = List.generate(_contentItemCount, (i) {
-      final double start = (i * itemStaggerMs) / contentTotalMs;
-      final double end = (i * itemStaggerMs + itemDurationMs) / contentTotalMs;
+    _contentAnims = List.generate(_features.length, (i) {
+      final double start = (i * cardStaggerMs) / contentTotalMs;
+      final double end   = (i * cardStaggerMs + cardDurationMs) / contentTotalMs;
       return CurvedAnimation(
         parent: _contentController,
         curve: Interval(start, end, curve: Curves.easeOut),
+      );
+    });
+
+    _fadeAnims = List.generate(3, (i) {
+      final int startMs = lastCardEndMs + i * fadeStaggerMs;
+      final int endMs   = startMs + fadeDurationMs;
+      return CurvedAnimation(
+        parent: _contentController,
+        curve: Interval(
+          startMs / contentTotalMs,
+          endMs / contentTotalMs,
+          curve: Curves.easeIn,
+        ),
       );
     });
 
@@ -243,9 +263,9 @@ class _WalletScreenState extends State<WalletScreen>
 
                           const SizedBox(height: AppConstants.spacingL),
 
-                          // ── Add Money CTA ────────────────────────────────
-                          _SlideInWidget(
-                            animation: _contentAnims[_features.length],
+                          // ── Add Money CTA (fade only) ─────────────────────
+                          FadeTransition(
+                            opacity: _fadeAnims[0],
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: AppConstants.screenHorizontalPadding,
@@ -256,17 +276,17 @@ class _WalletScreenState extends State<WalletScreen>
 
                           const SizedBox(height: AppConstants.spacingL),
 
-                          // ── Claim gift card row ──────────────────────────
-                          _SlideInWidget(
-                            animation: _contentAnims[_features.length + 1],
+                          // ── Claim gift card row (fade only) ───────────────
+                          FadeTransition(
+                            opacity: _fadeAnims[1],
                             child: ClaimGiftCardWidget(onTap: () {}),
                           ),
 
                           const SizedBox(height: AppConstants.spacingL),
 
-                          // ── Watermark text ───────────────────────────────
-                          _SlideInWidget(
-                            animation: _contentAnims[_features.length + 2],
+                          // ── Watermark text (fade only) ────────────────────
+                          FadeTransition(
+                            opacity: _fadeAnims[2],
                             child: _WatermarkText(),
                           ),
 
